@@ -12,7 +12,7 @@ jobs:
       - name: Checkout sources
         uses: actions/checkout@v2
       - name: Install linux libs
-        run: sudo apt-get update; sudo apt-get install --no-install-recommends pkg-config build-essential  gcc-multilib libudev-dev libudev1:i386 libudev-dev:i386
+        run: sudo apt-get update; sudo apt-get install --no-install-recommends pkg-config build-essential gcc-multilib libudev-dev
       - name: Install stable toolchain
         uses: actions-rs/toolchain@v1
         with:
