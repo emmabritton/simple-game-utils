@@ -5,6 +5,24 @@
 
 Simple game utilities 
 
+## Usage
+
+### Cargo
+
+In your Cargo.toml file add
+
+```
+simple-game-utils = { version = "0.2.0", features = ["controller", "serde"] }
+```
+
+### Code
+
+```
+let controller = Controller::new();
+
+controller
+```
+
 ## Features
 
 ### controller

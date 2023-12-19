@@ -1,5 +1,7 @@
 use gilrs::{Button, Event, EventType, Gilrs};
 
+pub use gilrs::Error;
+
 #[derive(Debug)]
 pub struct GameController {
     gilrs: Gilrs,
@@ -9,31 +11,46 @@ pub struct GameController {
 }
 
 impl GameController {
-    pub fn new(gilrs: Gilrs) -> Self {
-        GameController {
-            gilrs,
+    pub fn new() -> Result<Self, Error> {
+        Ok(GameController {
+            gilrs: Gilrs::new()?,
             direction: DirectionState::default(),
             action: ActionState::default(),
             menu: MenuState::default(),
-        }
+        })
+    }
+
+    pub fn new_unchecked() -> Self {
+        Self::new().expect("Failed to init controller")
     }
 
     pub fn from_state(
-        gilrs: Gilrs,
+        direction: DirectionState,
+        action: ActionState,
+        menu: MenuState,
+    ) -> Result<Self, Error> {
+        Ok(GameController {
+            gilrs: Gilrs::new()?,
+            direction,
+            action,
+            menu,
+        })
+    }
+
+    pub fn from_state_unchecked(
         direction: DirectionState,
         action: ActionState,
         menu: MenuState,
     ) -> Self {
-        GameController {
-            gilrs,
-            direction,
-            action,
-            menu,
-        }
+        Self::from_state(direction, action, menu).expect("Failed to init controller")
     }
 }
 
 impl GameController {
+    pub fn any_connected(&self) -> bool {
+        self.gilrs.gamepads().any(|(_, pad)| pad.is_connected())
+    }
+
     pub fn to_state(&self) -> (DirectionState, ActionState, MenuState) {
         (
             self.direction.clone(),

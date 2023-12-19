@@ -1,4 +1,8 @@
 # Changelog
 
+### Version 0.2.0
+- Add `any_connected(): bool`
+- Remove `Gilrs` from constructor parameters
+
 ### Version 0.1.0
 - Initial release
