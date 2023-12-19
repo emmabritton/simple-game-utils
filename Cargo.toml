@@ -1,0 +1,20 @@
+[package]
+name = "simple-game-utils"
+version = "0.1.0"
+edition = "2021"
+authors = ["Emma Britton <emmabritton@pm.me>"]
+description = "Utilities for simple games"
+license-file = "LICENSE"
+repository = "https://github.com/emmabritton/simple-game-utils"
+readme = "README.md"
+keywords = ["graphics", "gamedev", "simple"]
+categories = ["graphics", "game-development"]
+
+[features]
+default = ["controller"]
+controller = ["gilrs"]
+serde = ["dep:serde"]
+
+[dependencies]
+gilrs = { version = "0.10.4", optional = true }
+serde = { version = "1.0.193", features = ["derive"], optional = true }
