@@ -1,7 +1,7 @@
-use std::io::Cursor;
-use audio_engine::{AudioEngine, Sound, WavDecoder};
 use crate::error::GameUtilError;
 use crate::timing::Timing;
+use audio_engine::{AudioEngine, Sound, WavDecoder};
+use std::io::Cursor;
 
 /// Sound effect (although it can also be used for music)
 /// You must call [SoundEffect::update] or [SoundEffect::update_secs] with accurate values and often otherwise playback may stutter or jump
@@ -38,13 +38,24 @@ pub struct SoundEffect {
 }
 
 pub trait NewSoundEffect {
-    fn load_from_bytes(&self, bytes: &'static [u8], duration: f64) -> Result<SoundEffect, GameUtilError>;
+    fn load_from_bytes(
+        &self,
+        bytes: &'static [u8],
+        duration: f64,
+    ) -> Result<SoundEffect, GameUtilError>;
 }
 
 impl NewSoundEffect for AudioEngine {
-    fn load_from_bytes(&self, bytes: &'static [u8], duration: f64) -> Result<SoundEffect, GameUtilError> {
-        let decoder = WavDecoder::new(Cursor::new(bytes)).map_err(|e| GameUtilError::SoundEffectInvalid(e))?;
-        let sound = self.new_sound(decoder).map_err(|e| GameUtilError::SoundEffectInit(e))?;
+    fn load_from_bytes(
+        &self,
+        bytes: &'static [u8],
+        duration: f64,
+    ) -> Result<SoundEffect, GameUtilError> {
+        let decoder = WavDecoder::new(Cursor::new(bytes))
+            .map_err(GameUtilError::SoundEffectInvalid)?;
+        let sound = self
+            .new_sound(decoder)
+            .map_err(GameUtilError::SoundEffectInit)?;
         Ok(SoundEffect::new(sound, duration))
     }
 }

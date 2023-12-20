@@ -7,5 +7,5 @@ pub enum GameUtilError {
     SoundEffectInit(&'static str),
     #[cfg(feature = "sound")]
     #[error("Invalid sound data")]
-    SoundEffectInvalid(hound::Error)
+    SoundEffectInvalid(hound::Error),
 }

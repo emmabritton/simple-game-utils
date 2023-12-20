@@ -174,7 +174,7 @@ mod test {
 
     #[test]
     fn basic_test_delayed() {
-        let mut timer = Timer::new_with_delay(1.0,1.0);
+        let mut timer = Timer::new_with_delay(1.0, 1.0);
         assert!(!timer.update_secs(0.4));
         assert!(!timer.update_secs(0.4));
         assert!(timer.update_secs(0.4));
