@@ -87,6 +87,11 @@ impl Timer {
     pub fn trigger(&mut self) {
         self.remaining = 0.0;
     }
+
+    /// Add `seconds` to remaining
+    pub fn delay(&mut self, seconds: f64) {
+        self.remaining += seconds;
+    }
 }
 
 /// Used to track time in games

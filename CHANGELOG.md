@@ -1,5 +1,8 @@
 # Changelog
 
+### Version 0.3.1
+- Add `Timer::delay()`
+
 ### Version 0.3.0
 - Add `Timing` and `Timer`
 - Add `SoundEffect`
