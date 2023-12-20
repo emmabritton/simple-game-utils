@@ -2,6 +2,18 @@ use gilrs::{Button, Event, EventType, Gilrs};
 
 pub use gilrs::Error;
 
+///
+/// ```
+/// # use simple_game_utils::controller::GameController;
+/// let mut controller = GameController::new().expect("Unable to init controller");
+///
+/// loop {
+///     controller.update();
+///     if controller.action.north {
+///         println!("Triangle pressed");
+///     }
+/// }
+/// ```
 #[derive(Debug)]
 pub struct GameController {
     gilrs: Gilrs,

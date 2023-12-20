@@ -7,14 +7,18 @@ description = "Utilities for simple games"
 license-file = "LICENSE"
 repository = "https://github.com/emmabritton/simple-game-utils"
 readme = "README.md"
-keywords = ["graphics", "gamedev", "simple"]
-categories = ["graphics", "game-development"]
+keywords = ["sound", "controller", "gamedev", "simple"]
+categories = ["game-development"]
 
 [features]
-default = ["controller"]
+default = ["controller", "sound"]
 controller = ["gilrs"]
 serde = ["dep:serde"]
+sound = ["audio-engine", "hound"]
 
 [dependencies]
 gilrs = { version = "0.10.4", optional = true }
 serde = { version = "1.0.193", features = ["derive"], optional = true }
+audio-engine = { version = "0.4.5", optional = true }
+thiserror = "1.0.51"
+hound = { version = "3.5.1", optional = true }

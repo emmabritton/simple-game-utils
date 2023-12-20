@@ -1,5 +1,9 @@
 # Changelog
 
+### Version 0.3.0
+- Add `Timing` and `Timer`
+- Add `SoundEffect`
+
 ### Version 0.2.0
 - Add `any_connected(): bool`
 - Remove `Gilrs` from constructor parameters
