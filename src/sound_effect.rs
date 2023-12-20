@@ -51,8 +51,8 @@ impl NewSoundEffect for AudioEngine {
         bytes: &'static [u8],
         duration: f64,
     ) -> Result<SoundEffect, GameUtilError> {
-        let decoder = WavDecoder::new(Cursor::new(bytes))
-            .map_err(GameUtilError::SoundEffectInvalid)?;
+        let decoder =
+            WavDecoder::new(Cursor::new(bytes)).map_err(GameUtilError::SoundEffectInvalid)?;
         let sound = self
             .new_sound(decoder)
             .map_err(GameUtilError::SoundEffectInit)?;
