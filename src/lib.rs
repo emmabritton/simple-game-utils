@@ -1,3 +1,27 @@
+//! Simple Game Utilities
+//!
+//! # Usage
+//!
+//! ```
+//!# use simple_game_utils::prelude::*;
+//!# let engine = AudioEngine::new().unwrap();
+//!# let bytes = [0,0,0,0,0,0,0];
+//!# let duration = 1.0;
+//! let mut  timing = Timing::new(240);
+//! let mut  timer = Timer::new_with_delay(1.0, 1.0); //timer that triggers after 1s then every second
+//! let mut  sound = engine.load_from_bytes(&bytes, duration).unwrap();
+//!
+//! sound.play();
+//! loop {
+//!     timing.update();
+//!     sound.update(&timing);
+//!     if timer.update(&timing) {
+//!         break;
+//!     }
+//! }
+//!
+//! ```
+
 #[cfg(feature = "controller")]
 pub mod controller;
 pub mod error;
