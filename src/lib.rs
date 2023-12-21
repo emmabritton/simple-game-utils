@@ -26,23 +26,23 @@
 #[cfg(feature = "controller")]
 pub mod controller;
 pub mod error;
+#[cfg(feature = "prefs")]
+pub mod prefs;
 #[cfg(feature = "sound")]
 pub mod sound_effect;
 pub mod timing;
-#[cfg(feature = "prefs")]
-pub mod prefs;
 
 pub mod prelude {
     #[cfg(feature = "controller")]
     pub use crate::controller::*;
     pub use crate::error::*;
+    #[cfg(feature = "prefs")]
+    pub use crate::prefs::app_prefs::*;
+    #[cfg(feature = "prefs")]
+    pub use crate::prefs::*;
     #[cfg(feature = "sound")]
     pub use crate::sound_effect::*;
     pub use crate::timing::*;
     #[cfg(feature = "sound")]
     pub use audio_engine::AudioEngine;
-    #[cfg(feature = "prefs")]
-    pub use crate::prefs::*;
-    #[cfg(feature = "prefs")]
-    pub use crate::prefs::app_prefs::*;
 }

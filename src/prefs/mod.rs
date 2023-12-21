@@ -1,18 +1,18 @@
 pub mod app_prefs;
 
+use crate::error::GameUtilError;
+use directories::ProjectDirs;
+use serde::de::DeserializeOwned;
+use serde::Serialize;
 use std::collections::HashMap;
 use std::fs;
 use std::fs::remove_file;
 use std::path::PathBuf;
-use directories::ProjectDirs;
-use serde::de::DeserializeOwned;
-use serde::Serialize;
-use crate::error::GameUtilError;
 
 #[derive(Clone, Debug)]
 pub struct Preferences<T>
-    where
-        T: Serialize + DeserializeOwned,
+where
+    T: Serialize + DeserializeOwned,
 {
     data: HashMap<String, T>,
     file: PathBuf,
@@ -31,22 +31,24 @@ impl<T: Serialize + DeserializeOwned> Preferences<T> {
 impl<T: Serialize + DeserializeOwned> Preferences<T> {
     pub fn load(&mut self) -> Result<(), GameUtilError> {
         let json_str = if self.file.exists() {
-            fs::read_to_string(&self.file)
-                .map_err(|err| GameUtilError::Loading(err.to_string(), self.file.to_string_lossy().to_string()))?
+            fs::read_to_string(&self.file).map_err(|err| {
+                GameUtilError::Loading(err.to_string(), self.file.to_string_lossy().to_string())
+            })?
         } else {
             String::from("{}")
         };
-        self.data =
-            serde_json::from_str(&json_str).map_err(|err| GameUtilError::Deserializing(err.to_string()))?;
+        self.data = serde_json::from_str(&json_str)
+            .map_err(|err| GameUtilError::Deserializing(err.to_string()))?;
 
         Ok(())
     }
 
     pub fn save(&self) -> Result<(), GameUtilError> {
-        let json_str =
-            serde_json::to_string(&self.data).map_err(|err| GameUtilError::Serializing(err.to_string()))?;
-        fs::write(&self.file, json_str)
-            .map_err(|err| GameUtilError::Saving(err.to_string(), self.file.to_string_lossy().to_string()))?;
+        let json_str = serde_json::to_string(&self.data)
+            .map_err(|err| GameUtilError::Serializing(err.to_string()))?;
+        fs::write(&self.file, json_str).map_err(|err| {
+            GameUtilError::Saving(err.to_string(), self.file.to_string_lossy().to_string())
+        })?;
 
         Ok(())
     }
@@ -75,8 +77,9 @@ pub fn get_pref_dir(
 ) -> Result<PathBuf, GameUtilError> {
     return if let Some(dir) = ProjectDirs::from(qualifier, organization, application) {
         let path = dir.preference_dir().to_path_buf();
-        fs::create_dir_all(path.clone())
-            .map_err(|err| GameUtilError::MakingDirs(err.to_string(), path.to_string_lossy().to_string()))?;
+        fs::create_dir_all(path.clone()).map_err(|err| {
+            GameUtilError::MakingDirs(err.to_string(), path.to_string_lossy().to_string())
+        })?;
         Ok(path)
     } else {
         Err(GameUtilError::AppPrefDir)

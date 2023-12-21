@@ -1,6 +1,6 @@
-use serde::Serialize;
-use log::error;
 use crate::prefs::*;
+use log::error;
+use serde::Serialize;
 
 const FILE_NAME: &str = "app.prefs";
 const KEY: &str = "settings";
