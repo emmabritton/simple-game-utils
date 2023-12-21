@@ -1,6 +1,6 @@
 [package]
 name = "simple-game-utils"
-version = "0.3.1"
+version = "0.3.2"
 edition = "2021"
 authors = ["Emma Britton <emmabritton@pm.me>"]
 description = "Utilities for simple games"
@@ -11,14 +11,18 @@ keywords = ["sound", "controller", "gamedev", "simple"]
 categories = ["game-development"]
 
 [features]
-default = ["controller", "sound"]
+default = ["controller", "sound", "prefs"]
 controller = ["gilrs"]
 serde = ["dep:serde"]
 sound = ["audio-engine", "hound"]
+prefs = ["dep:serde", "serde_json", "directories"]
 
 [dependencies]
+log = "0.4.20"
 gilrs = { version = "0.10.4", optional = true }
 serde = { version = "1.0.193", features = ["derive"], optional = true }
 audio-engine = { version = "0.4.5", optional = true }
 thiserror = "1.0.51"
 hound = { version = "3.5.1", optional = true }
+serde_json = { version = "1.0.108", optional = true }
+directories = { version = "5.0.1", optional = true }

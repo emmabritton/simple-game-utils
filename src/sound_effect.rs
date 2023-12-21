@@ -8,21 +8,23 @@ use std::io::Cursor;
 ///
 /// # Usage
 ///
-/// ```
+/// ```no_run
+///# const BYTES: [u8; 6] = [0,0,0,0,0,0];
+///# fn main() {
 ///# use audio_engine::AudioEngine;
 ///# use simple_game_utils::sound_effect::NewSoundEffect;
 ///# use simple_game_utils::timing::Timing;
-///# let some_sound_bytes = [0,0,0,0,0,0];
 ///# let mut  timing = Timing::new(240);
 ///# let duration = 1.0;
 /// //this must live as long as `sound` but there's no lifetimes to enforce this
 /// let mut engine = AudioEngine::new().unwrap();
-/// let mut sound = engine.load_from_bytes(&some_sound_bytes, duration).unwrap();
+/// let mut sound = engine.load_from_bytes(&BYTES, duration).unwrap();
 /// sound.play();
 /// loop {
 ///     timing.update();
 ///     sound.update(&timing);
 /// }
+///# }
 /// ```
 pub struct SoundEffect {
     //Sound data

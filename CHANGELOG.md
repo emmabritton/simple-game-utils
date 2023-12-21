@@ -1,5 +1,8 @@
 # Changelog
 
+### Version 0.3.2
+- Add preferences
+
 ### Version 0.3.1
 - Add `Timer::delay()`
 

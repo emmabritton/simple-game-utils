@@ -65,7 +65,27 @@ loop {
 }
 ```
 
+#### Preferences
+
+> Requires `prefs` feature
+
+```rust
+struct Settings {
+    user: String,
+    theme: usize
+}
+
+let prefs: AppPrefs<Settings> = AppPrefs::new("com","example","readme", || Settings::default()).unwrap();
+println!("{}", prefs.data.user);
+prefs.data.user = String::new("New");
+prefs.save();
+```
+
 ## Features
+
+### prefs
+
+Simple struct storage
 
 ### controller
 

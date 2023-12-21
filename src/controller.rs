@@ -12,6 +12,7 @@ pub use gilrs::Error;
 ///     if controller.action.north {
 ///         println!("Triangle pressed");
 ///     }
+///#    break;
 /// }
 /// ```
 #[derive(Debug)]
