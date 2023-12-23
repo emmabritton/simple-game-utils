@@ -1,7 +1,7 @@
 use gilrs::{Button, Event, EventType, GamepadId, Gilrs};
 
-pub use gilrs::Error;
 use crate::prelude::Controller::{Playstation, Switch, Xbox};
+pub use gilrs::Error;
 
 ///
 /// ```
@@ -81,12 +81,7 @@ impl GameController {
     }
 
     pub fn update(&mut self) {
-        while let Some(Event {
-                           id,
-                           event,
-                           time: _,
-                       }) = self.gilrs.next_event()
-        {
+        while let Some(Event { id, event, time: _ }) = self.gilrs.next_event() {
             match event {
                 EventType::ButtonPressed(button, _code) => self.set_state(button, true),
                 EventType::ButtonRepeated(_, _) => {}
@@ -140,9 +135,13 @@ impl GameController {
             let product = u16::from_le_bytes([uuid[8], uuid[9]]);
             match (vendor, product) {
                 (0x54c, 0xdf2 | 0xce6 | 0xcda | 0x9cc | 0x5c4 | 0x268) => Some(Playstation),
-                (0x45e, 0x202 | 0x285 | 0x289 | 0x28e | 0x28f | 0x2d1 | 0x2dd | 0x2e0 | 0x2e3 | 0x2ea | 0x2fd | 0xb12 | 0xb00) => Some(Xbox),
+                (
+                    0x45e,
+                    0x202 | 0x285 | 0x289 | 0x28e | 0x28f | 0x2d1 | 0x2dd | 0x2e0 | 0x2e3 | 0x2ea
+                    | 0x2fd | 0xb12 | 0xb00,
+                ) => Some(Xbox),
                 (0x57e, 0x2009) => Some(Switch),
-                _ => None
+                _ => None,
             }
         } else {
             None
