@@ -220,3 +220,20 @@ pub const CNTR_MASK_NORTH: u16 = 0b00000000_00001000;
 pub const CNTR_MASK_SOUTH: u16 = 0b00000000_00000100;
 pub const CNTR_MASK_EAST: u16 = 0b00000000_00000010;
 pub const CNTR_MASK_WEST: u16 = 0b00000000_00000001;
+
+#[cfg(test)]
+mod test {
+    use crate::prelude::{CNTR_MASK_EAST, CNTR_MASK_UP, GameController};
+
+    #[test]
+    fn check_mask() {
+        let mut controller = GameController::new_unchecked();
+        controller.direction.up = true;
+
+        assert_eq!(controller.mask(), CNTR_MASK_UP);
+
+        controller.action.east = true;
+
+        assert_eq!(controller.mask(), CNTR_MASK_UP | CNTR_MASK_EAST);
+    }
+}

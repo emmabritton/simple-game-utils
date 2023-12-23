@@ -12,7 +12,7 @@ Simple game utilities
 In your Cargo.toml file add
 
 ```
-simple-game-utils = { version = "0.3.4", features = ["controller", "serde", "sound] }
+simple-game-utils = { version = "0.3.5", features = ["controller", "serde", "sound] }
 ```
 
 ### Code
@@ -92,6 +92,10 @@ Simple struct storage
 Very basic controller support
 
 - no support for choosing controllers
+
+#### xinput
+
+Use XInput for controllers (windows only)
 
 ### sound
 

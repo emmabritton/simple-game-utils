@@ -1,5 +1,8 @@
 # Changelog
 
+### Version 0.3.5
+-Add xinput feature
+
 ### Version 0.3.4
 - Add derive to controller type
 - Fix serde derive for controller enums
