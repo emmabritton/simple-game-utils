@@ -1,6 +1,7 @@
-use gilrs::{Button, Event, EventType, Gilrs};
+use gilrs::{Button, Event, EventType, GamepadId, Gilrs};
 
 pub use gilrs::Error;
+use crate::prelude::Controller::{Playstation, Switch, Xbox};
 
 ///
 /// ```
@@ -21,6 +22,7 @@ pub struct GameController {
     pub direction: DirectionState,
     pub action: ActionState,
     pub menu: MenuState,
+    last_connected: Option<GamepadId>,
 }
 
 impl GameController {
@@ -30,6 +32,7 @@ impl GameController {
             direction: DirectionState::default(),
             action: ActionState::default(),
             menu: MenuState::default(),
+            last_connected: None,
         })
     }
 
@@ -47,6 +50,7 @@ impl GameController {
             direction,
             action,
             menu,
+            last_connected: None,
         })
     }
 
@@ -78,19 +82,26 @@ impl GameController {
 
     pub fn update(&mut self) {
         while let Some(Event {
-            id: _,
-            event,
-            time: _,
-        }) = self.gilrs.next_event()
+                           id,
+                           event,
+                           time: _,
+                       }) = self.gilrs.next_event()
         {
             match event {
                 EventType::ButtonPressed(button, _code) => self.set_state(button, true),
                 EventType::ButtonRepeated(_, _) => {}
-                EventType::ButtonReleased(button, _code) => self.set_state(button, false),
+                EventType::ButtonReleased(button, _code) => {
+                    self.last_connected = Some(id);
+                    self.set_state(button, false);
+                }
                 EventType::ButtonChanged(_, _, _) => {}
                 EventType::AxisChanged(_, _, _) => {}
                 EventType::Connected => {}
-                EventType::Disconnected => {}
+                EventType::Disconnected => {
+                    if self.last_connected == Some(id) {
+                        self.last_connected = None;
+                    }
+                }
                 EventType::Dropped => {}
             }
         }
@@ -120,6 +131,29 @@ impl GameController {
             Button::Unknown => {}
         }
     }
+
+    // using http://www.linux-usb.org/usb.ids as source
+    pub fn get_controller_type(&self) -> Option<Controller> {
+        if let Some(id) = self.last_connected {
+            let uuid = self.gilrs.gamepad(id).uuid();
+            let vendor = u16::from_le_bytes([uuid[4], uuid[5]]);
+            let product = u16::from_le_bytes([uuid[8], uuid[9]]);
+            match (vendor, product) {
+                (0x54c, 0xdf2 | 0xce6 | 0xcda | 0x9cc | 0x5c4 | 0x268) => Some(Playstation),
+                (0x45e, 0x202 | 0x285 | 0x289 | 0x28e | 0x28f | 0x2d1 | 0x2dd | 0x2e0 | 0x2e3 | 0x2ea | 0x2fd | 0xb12 | 0xb00) => Some(Xbox),
+                (0x57e, 0x2009) => Some(Switch),
+                _ => None
+            }
+        } else {
+            None
+        }
+    }
+}
+
+pub enum Controller {
+    Playstation,
+    Xbox,
+    Switch,
 }
 
 #[cfg_attr(feature = "serde_derive", derive(Serialize, Deserialize))]

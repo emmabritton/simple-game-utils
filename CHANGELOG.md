@@ -1,5 +1,8 @@
 # Changelog
 
+### Version 0.3.3
+- Add controller type
+
 ### Version 0.3.2
 - Add preferences
 

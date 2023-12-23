@@ -12,7 +12,7 @@ Simple game utilities
 In your Cargo.toml file add
 
 ```
-simple-game-utils = { version = "0.3.1", features = ["controller", "serde", "sound] }
+simple-game-utils = { version = "0.3.3", features = ["controller", "serde", "sound] }
 ```
 
 ### Code
@@ -92,7 +92,6 @@ Simple struct storage
 Very basic controller support
 
 - no support for choosing controllers
-- no support for detecting disconnections, etc
 
 ### sound
 
