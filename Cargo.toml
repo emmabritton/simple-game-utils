@@ -1,6 +1,6 @@
 [package]
 name = "simple-game-utils"
-version = "0.3.5"
+version = "0.4.0"
 edition = "2021"
 authors = ["Emma Britton <emmabritton@pm.me>"]
 description = "Utilities for simple games"
@@ -11,12 +11,12 @@ keywords = ["sound", "controller", "gamedev", "simple"]
 categories = ["game-development"]
 
 [features]
-default = ["controller", "sound", "prefs"]
-controller = ["gilrs"]
+default = ["sound", "prefs"]
+controller = ["gilrs", "gilrs/wgi"]
 serde = ["dep:serde"]
 sound = ["audio-engine", "hound"]
 prefs = ["dep:serde", "serde_json", "directories"]
-xinput = ["controller", "gilrs/xinput"]
+controller_xinput = ["gilrs", "gilrs/xinput"]
 
 [dependencies]
 log = "0.4.20"

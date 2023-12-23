@@ -12,7 +12,7 @@ Simple game utilities
 In your Cargo.toml file add
 
 ```
-simple-game-utils = { version = "0.3.5", features = ["controller", "serde", "sound] }
+simple-game-utils = { version = "0.4.0", features = ["controller", "serde", "sound] }
 ```
 
 ### Code
@@ -51,7 +51,7 @@ loop {
 
 #### Controller
 
-> Requires `controller` feature
+> Requires `controller` or `controller_xinput` feature
 
 ```rust
 // This will work whether or not there's a controller plugged in
@@ -83,6 +83,8 @@ prefs.save();
 
 ## Features
 
+### Defaults: `prefs`, `sound`
+
 ### prefs
 
 Simple struct storage
@@ -93,9 +95,13 @@ Very basic controller support
 
 - no support for choosing controllers
 
-#### xinput
+> Can not be used with `controllerxinput`
+
+#### controller_xinput
 
 Use XInput for controllers (windows only)
+
+> Can not be used with `controller`
 
 ### sound
 

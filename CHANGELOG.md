@@ -1,7 +1,8 @@
 # Changelog
 
-### Version 0.3.5
--Add xinput feature
+### Version 0.4.0
+- Add xinput feature
+- controller feature no longer enabled by default 
 
 ### Version 0.3.4
 - Add derive to controller type

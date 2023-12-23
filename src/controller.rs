@@ -223,7 +223,7 @@ pub const CNTR_MASK_WEST: u16 = 0b00000000_00000001;
 
 #[cfg(test)]
 mod test {
-    use crate::prelude::{CNTR_MASK_EAST, CNTR_MASK_UP, GameController};
+    use crate::prelude::{GameController, CNTR_MASK_EAST, CNTR_MASK_UP};
 
     #[test]
     fn check_mask() {
