@@ -1,7 +1,11 @@
 # Changelog
 
+### Version 0.3.4
+- Add derive to controller type
+- Fix serde derive for controller enums
+
 ### Version 0.3.3
-- Add controller type
+- Add controller type and method
 
 ### Version 0.3.2
 - Add preferences

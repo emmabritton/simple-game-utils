@@ -2,6 +2,8 @@ use gilrs::{Button, Event, EventType, GamepadId, Gilrs};
 
 use crate::prelude::Controller::{Playstation, Switch, Xbox};
 pub use gilrs::Error;
+#[cfg(feature = "serde")]
+use serde::{Deserialize, Serialize};
 
 ///
 /// ```
@@ -149,14 +151,16 @@ impl GameController {
     }
 }
 
+#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
+#[derive(Debug, Copy, Clone, Eq, PartialEq, Hash)]
 pub enum Controller {
     Playstation,
     Xbox,
     Switch,
 }
 
-#[cfg_attr(feature = "serde_derive", derive(Serialize, Deserialize))]
-#[derive(Debug, Default, Clone)]
+#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
+#[derive(Debug, Default, Clone, Eq, PartialEq, Hash)]
 pub struct DirectionState {
     pub up: bool,
     pub down: bool,
@@ -173,8 +177,8 @@ impl DirectionState {
     }
 }
 
-#[cfg_attr(feature = "serde_derive", derive(Serialize, Deserialize))]
-#[derive(Debug, Default, Clone)]
+#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
+#[derive(Debug, Default, Clone, Eq, PartialEq, Hash)]
 pub struct MenuState {
     pub start: bool,
 }
@@ -189,8 +193,8 @@ impl MenuState {
     }
 }
 
-#[cfg_attr(feature = "serde_derive", derive(Serialize, Deserialize))]
-#[derive(Debug, Default, Clone)]
+#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
+#[derive(Debug, Default, Clone, Eq, PartialEq, Hash)]
 pub struct ActionState {
     pub north: bool,
     pub south: bool,
