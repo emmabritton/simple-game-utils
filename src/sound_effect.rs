@@ -1,6 +1,7 @@
 use crate::error::GameUtilError;
 use crate::timing::Timing;
 use audio_engine::{AudioEngine, Sound, WavDecoder};
+use std::fmt::{Debug, Formatter};
 use std::io::Cursor;
 
 /// Sound effect (although it can also be used for music)
@@ -37,6 +38,16 @@ pub struct SoundEffect {
     next_play_in: f64,
     //If sound automatically loops
     loops: bool,
+}
+
+impl Debug for SoundEffect {
+    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+        write!(
+            f,
+            "Sound: is_playing: {}, duration: {:.1}s, loops: {}",
+            self.is_playing, self.duration, self.loops
+        )
+    }
 }
 
 pub trait NewSoundEffect {

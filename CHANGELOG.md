@@ -1,5 +1,9 @@
 # Changelog
 
+### Version 0.4.1
+- Fix serde feature
+- Enable serde feature by default
+
 ### Version 0.4.0
 - Add xinput feature
 - controller feature no longer enabled by default 

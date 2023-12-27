@@ -12,7 +12,7 @@ Simple game utilities
 In your Cargo.toml file add
 
 ```
-simple-game-utils = { version = "0.4.0", features = ["controller", "serde", "sound] }
+simple-game-utils = { version = "0.4.1", features = ["controller"] }
 ```
 
 ### Code
@@ -83,7 +83,7 @@ prefs.save();
 
 ## Features
 
-### Defaults: `prefs`, `sound`
+> Default features: `prefs`, `sound`, `serde`
 
 ### prefs
 
@@ -109,4 +109,4 @@ Basic sound effects or music playback
 
 ### serde
 
-Adds serialization for some structs
+Adds serialization for some structs and enums

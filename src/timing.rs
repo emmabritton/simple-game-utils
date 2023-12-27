@@ -1,3 +1,5 @@
+#[cfg(feature = "serde")]
+use serde::{Deserialize, Serialize};
 use std::time::Instant;
 
 /// Used for single or repeated timed events, uses fractional seconds
@@ -14,6 +16,7 @@ use std::time::Instant;
 ///    }
 ///}
 /// ```
+#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 #[derive(Debug, Clone, PartialEq)]
 pub struct Timer {
     /// amount of time remaining
@@ -95,7 +98,7 @@ impl Timer {
 }
 
 /// Used to track time in games
-#[derive(Debug)]
+#[derive(Debug, Clone, PartialEq)]
 pub struct Timing {
     /// amount of time that has passed since last
     pub delta: f64,
