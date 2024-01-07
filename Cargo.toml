@@ -1,6 +1,6 @@
 [package]
 name = "simple-game-utils"
-version = "0.4.1"
+version = "0.4.2"
 edition = "2021"
 authors = ["Emma Britton <emmabritton@pm.me>"]
 description = "Utilities for simple games"
@@ -21,9 +21,9 @@ controller_xinput = ["gilrs", "gilrs/xinput"]
 [dependencies]
 log = "0.4.20"
 gilrs = { version = "0.10.4", optional = true, default-features = false }
-serde = { version = "1.0.193", features = ["derive"], optional = true }
+serde = { version = "1.0.195", features = ["derive"], optional = true }
 audio-engine = { version = "0.4.5", optional = true }
-thiserror = "1.0.52"
+thiserror = "1.0.56"
 hound = { version = "3.5.1", optional = true }
-serde_json = { version = "1.0.108", optional = true }
+serde_json = { version = "1.0.111", optional = true }
 directories = { version = "5.0.1", optional = true }

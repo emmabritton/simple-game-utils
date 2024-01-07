@@ -23,6 +23,7 @@ const KEY: &str = "settings";
 /// prefs.save();
 ///```
 ///
+#[derive(Debug, Clone)]
 pub struct AppPrefs<T: Sized + Clone + Serialize + DeserializeOwned> {
     prefs: Preferences<T>,
     pub data: T,
@@ -56,6 +57,15 @@ impl<T: Sized + Clone + Serialize + DeserializeOwned> AppPrefs<T> {
         self.prefs.set(KEY, self.data.clone());
         if let Err(e) = self.prefs.save() {
             error!("Unable to save app prefs: {e:?}");
+        }
+    }
+
+    pub fn reload(&mut self) {
+        if let Err(e) = self.prefs.load() {
+            error!("Unable to reload app prefs: {e:?}");
+        }
+        if let Some(data) = self.prefs.get(KEY) {
+            self.data = data.clone();
         }
     }
 }

@@ -1,5 +1,9 @@
 # Changelog
 
+### Version 0.4.2
+Add `derive` `clone` and `debug` to AppPrefs
+Add `reload()` to AppPrefs
+
 ### Version 0.4.1
 - Fix serde feature
 - Enable serde feature by default
