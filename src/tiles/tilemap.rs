@@ -88,7 +88,7 @@ impl<Image: Debug + Clone> Tilemap<Image> {
     ///
     /// Will match [Tilemap::first_visible_tile] unless a subtile offset is set
     pub fn first_visible_tile(&self) -> MapPosition {
-        if self.subtile_offset == (0,0) {
+        if self.subtile_offset == (0, 0) {
             self.offset
         } else {
             let (x_offset, y_offset) = self.tiles_visible_from_subtile_offset();
@@ -129,7 +129,7 @@ impl<Image: Debug + Clone> Tilemap<Image> {
         let mut offset = self.offset;
         offset.x += self.visible_size.w;
         offset.y += self.visible_size.h;
-        if self.subtile_offset == (0,0) {
+        if self.subtile_offset == (0, 0) {
             offset
         } else {
             let (x_offset, y_offset) = self.tiles_visible_from_subtile_offset();
@@ -192,8 +192,11 @@ impl<Image: Debug + Clone> Tilemap<Image> {
     }
 
     #[inline]
-    pub fn update_pos_with_offset(&self, pos: (isize, isize))-> (isize, isize) {
-        (pos.0 - self.subtile_offset.0 as isize, pos.1 - self.subtile_offset.1 as isize)
+    pub fn update_pos_with_offset(&self, pos: (isize, isize)) -> (isize, isize) {
+        (
+            pos.0 - self.subtile_offset.0 as isize,
+            pos.1 - self.subtile_offset.1 as isize,
+        )
     }
 
     /// Moves center of visible map to `pos`

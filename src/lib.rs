@@ -43,8 +43,8 @@ pub mod error;
 pub mod prefs;
 #[cfg(feature = "sound")]
 pub mod sound_effect;
-pub mod timing;
 pub mod tiles;
+pub mod timing;
 
 pub mod prelude {
     #[cfg(feature = "controller")]
@@ -56,8 +56,8 @@ pub mod prelude {
     pub use crate::prefs::*;
     #[cfg(feature = "sound")]
     pub use crate::sound_effect::*;
-    pub use crate::timing::*;
     pub use crate::tiles::prelude::*;
+    pub use crate::timing::*;
     #[cfg(feature = "sound")]
     pub use audio_engine::AudioEngine;
 }
