@@ -83,23 +83,22 @@ impl GameController {
     }
 
     pub fn update(&mut self) {
-        while let Some(Event { id, event, time: _ }) = self.gilrs.next_event() {
+        while let Some(Event {
+            id, event, time: _, ..
+        }) = self.gilrs.next_event()
+        {
             match event {
                 EventType::ButtonPressed(button, _code) => self.set_state(button, true),
-                EventType::ButtonRepeated(_, _) => {}
                 EventType::ButtonReleased(button, _code) => {
                     self.last_connected = Some(id);
                     self.set_state(button, false);
                 }
-                EventType::ButtonChanged(_, _, _) => {}
-                EventType::AxisChanged(_, _, _) => {}
-                EventType::Connected => {}
                 EventType::Disconnected => {
                     if self.last_connected == Some(id) {
                         self.last_connected = None;
                     }
                 }
-                EventType::Dropped => {}
+                _ => {}
             }
         }
     }

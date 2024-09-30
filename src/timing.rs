@@ -72,6 +72,7 @@ impl Timer {
 
 impl Timer {
     /// Update timer, returns true if triggered
+    #[inline]
     pub fn update(&mut self, timing: &Timing) -> bool {
         self.update_secs(timing.fixed_time_step)
     }
@@ -89,21 +90,25 @@ impl Timer {
 
     /// Set remaining to reset value (the number passed into the constructor)
     /// One time loops can trigger again after calling this
+    #[inline]
     pub fn reset(&mut self) {
         self.remaining = self.reset;
     }
 
     /// If the timer has reached 0, this will always be false for looping timers (unless reset is <= 0.0)
+    #[inline]
     pub fn has_triggered(&self) -> bool {
         self.remaining <= 0.0
     }
 
     /// Set remaining time to 0, triggering the timer
+    #[inline]
     pub fn trigger(&mut self) {
         self.remaining = 0.0;
     }
 
     /// Add `seconds` to remaining time, this can be higher than the duration
+    #[inline]
     pub fn delay(&mut self, seconds: f64) {
         self.remaining += seconds;
     }

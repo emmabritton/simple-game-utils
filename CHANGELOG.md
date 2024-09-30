@@ -1,6 +1,9 @@
 # Changelog
 
-### Version 0.5.0
+### Version 0.5.1
+- Fix bug with controllers
+
+### Version 0.5.0 (pulled)
 - Add `Tilemap`
 - Remove exact deps versions
 - Update deps
