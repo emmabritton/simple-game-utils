@@ -26,4 +26,6 @@ pub enum GameUtilError {
     #[cfg(feature = "prefs")]
     #[error("Creating pref dir: {0} at {1}")]
     MakingDirs(String, String),
+    #[error("Tileset for {0} is missing images: {1:?}")]
+    InvalidTileset(String, Vec<String>),
 }

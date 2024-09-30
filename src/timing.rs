@@ -4,6 +4,11 @@ use std::time::Instant;
 
 /// Used for single or repeated timed events, uses fractional seconds
 ///
+/// # Update
+/// When using [Timer::update] or [Timer::update_secs], note that
+/// * for timers created with [Timer::new_once] those methods will continue to return true until [Timer::reset] is called
+/// * other timers will only return true once per duration then automatically reset
+///
 /// # Usage
 ///
 /// ```
@@ -28,27 +33,34 @@ pub struct Timer {
 }
 
 impl Timer {
-    /// Create a timer with the duration of `reset` that automatically resets after triggering
-    /// Will trigger after `after`
-    pub fn new_with_delay(after: f64, reset: f64) -> Self {
+    /// Create a timer that will wait `delay` seconds then trigger every `duration` seconds
+    ///
+    /// # Usage
+    ///
+    /// `Timer::new_with_delay(2.0, 0.1)` will wait 2s then trigger every 0.1s
+    pub fn new_with_delay(delay: f64, duration: f64) -> Self {
         Self {
-            remaining: after,
-            reset,
+            remaining: delay,
+            reset: duration,
             looping: true,
         }
     }
 
-    /// Create a timer with the duration of `reset` that automatically resets after triggering
-    /// Will trigger immediately
-    pub fn new(reset: f64) -> Self {
+    /// Create a timer that will trigger every `duration` seconds
+    ///
+    /// # Usage
+    ///
+    /// `Timer::new(0.1)` will trigger immediately and then every 0.1s
+    pub fn new(duration: f64) -> Self {
         Self {
             remaining: 0.0,
-            reset,
+            reset: duration,
             looping: true,
         }
     }
 
-    /// Create a timer with the duration of `reset` that only triggers once
+    /// Create a timer with the duration of `after` seconds that only triggers once
+    /// Use `Timer::reset` to reset back to 0 and start counting again
     pub fn new_once(after: f64) -> Self {
         Self {
             remaining: after,
@@ -86,12 +98,12 @@ impl Timer {
         self.remaining <= 0.0
     }
 
-    /// Set remaining to 0, triggering the timer
+    /// Set remaining time to 0, triggering the timer
     pub fn trigger(&mut self) {
         self.remaining = 0.0;
     }
 
-    /// Add `seconds` to remaining
+    /// Add `seconds` to remaining time, this can be higher than the duration
     pub fn delay(&mut self, seconds: f64) {
         self.remaining += seconds;
     }

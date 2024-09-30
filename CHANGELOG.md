@@ -1,8 +1,13 @@
 # Changelog
 
+### Version 0.5.0
+- Add `Tilemap`
+- Remove exact deps versions
+- Update deps
+
 ### Version 0.4.2
-Add `derive` `clone` and `debug` to AppPrefs
-Add `reload()` to AppPrefs
+- Add `derive` `clone` and `debug` to AppPrefs
+- Add `reload()` to AppPrefs
 
 ### Version 0.4.1
 - Fix serde feature

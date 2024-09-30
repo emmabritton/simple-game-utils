@@ -12,7 +12,7 @@ Simple game utilities
 In your Cargo.toml file add
 
 ```
-simple-game-utils = { version = "0.4.2", features = ["controller"] }
+simple-game-utils = { version = "0.5.0", features = ["controller"] }
 ```
 
 ### Code
@@ -81,9 +81,15 @@ prefs.data.user = String::new("New");
 prefs.save();
 ```
 
+#### Tilemap
+
+```rust
+
+```
+
 ## Features
 
-> Default features: `prefs`, `sound`, `serde`
+> Default features: `prefs`, `sound`, `serde`, `ici`
 
 ### prefs
 
@@ -110,3 +116,7 @@ Basic sound effects or music playback
 ### serde
 
 Adds serialization for some structs and enums
+
+### ici
+
+Adds ICI file support for tilemap
