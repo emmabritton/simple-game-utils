@@ -79,8 +79,10 @@ impl<Image: Debug + Clone> Tilemap<Image> {
     pub fn px_for_tile<P: Into<MapPosition>>(&self, tile: P) -> (isize, isize) {
         let tile = tile.into();
         (
-            (self.tile_size.0 * tile.x) as isize - (self.tile_size.0 * self.offset.x) as isize + self.subtile_offset.0 as isize,
-            (self.tile_size.1 * tile.y) as isize - (self.tile_size.1 * self.offset.y) as isize + self.subtile_offset.1 as isize,
+            (self.tile_size.0 * tile.x) as isize - (self.tile_size.0 * self.offset.x) as isize
+                + self.subtile_offset.0 as isize,
+            (self.tile_size.1 * tile.y) as isize - (self.tile_size.1 * self.offset.y) as isize
+                + self.subtile_offset.1 as isize,
         )
     }
 
@@ -192,10 +194,7 @@ impl<Image: Debug + Clone> Tilemap<Image> {
                 let y = y.saturating_add(self.offset.y);
                 let i = (x + y * self.size.w) as usize;
                 if i < self.tiles.len() {
-                    render(
-                        &self.images[self.tiles[i]],
-                        self.update_pos_with_offset(self.onscreen_px_for_tile((x, y))),
-                    )
+                    render(&self.images[self.tiles[i]], self.px_for_tile((x, y)))
                 }
             }
         }
@@ -463,8 +462,8 @@ mod test {
 
         assert_eq!(tilemap.offset, MapPosition::new(0, 0));
         assert_eq!(tilemap.visible_size, MapSize::new(18, 12));
-        assert_eq!(tilemap.onscreen_px_for_tile((0_u32, 0)), (0, 0));
-        assert_eq!(tilemap.onscreen_px_for_tile((4_u32, 4)), (64, 64));
+        assert_eq!(tilemap.orig_px_for_tile((0_u32, 0)), (0, 0));
+        assert_eq!(tilemap.orig_px_for_tile((4_u32, 4)), (64, 64));
         assert_eq!(tilemap.first_visible_tile(), MapPosition::new(0, 0));
     }
 
@@ -488,8 +487,8 @@ mod test {
 
         assert_eq!(tilemap.offset, MapPosition::new(1, 0));
         assert_eq!(tilemap.visible_size, MapSize::new(18, 12));
-        assert_eq!(tilemap.onscreen_px_for_tile((0_u32, 0)), (-16, 0));
-        assert_eq!(tilemap.onscreen_px_for_tile((4_u32, 4)), (48, 64));
+        assert_eq!(tilemap.orig_px_for_tile((0_u32, 0)), (-16, 0));
+        assert_eq!(tilemap.orig_px_for_tile((4_u32, 4)), (48, 64));
         assert_eq!(tilemap.first_visible_tile(), MapPosition::new(1, 0));
     }
 
