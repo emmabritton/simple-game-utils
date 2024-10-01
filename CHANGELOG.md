@@ -1,5 +1,10 @@
 # Changelog
 
+### Version 0.5.2
+### BREAKING
+- Replace `Tilemap::onscreen_px_for_tile` with `Tilemap::orig_px_for_tile`
+- Add `Tilemap::px_for_tile`
+
 ### Version 0.5.1
 - Fix bug with controllers
 

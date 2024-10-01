@@ -74,9 +74,19 @@ impl<Image: Debug + Clone> Tilemap<Image> {
 }
 
 impl<Image: Debug + Clone> Tilemap<Image> {
-    /// Pixel coord for tile, ignores subtile offset
+    /// Pixel coord for tile
     /// Result may be offscreen, before or after
-    pub fn onscreen_px_for_tile<P: Into<MapPosition>>(&self, tile: P) -> (isize, isize) {
+    pub fn px_for_tile<P: Into<MapPosition>>(&self, tile: P) -> (isize, isize) {
+        let tile = tile.into();
+        (
+            (self.tile_size.0 * tile.x) as isize - (self.tile_size.0 * self.offset.x) as isize + self.subtile_offset.0 as isize,
+            (self.tile_size.1 * tile.y) as isize - (self.tile_size.1 * self.offset.y) as isize + self.subtile_offset.1 as isize,
+        )
+    }
+
+    /// Pixel coord for tile, ignoring subtile offset
+    /// Result may be offscreen, before or after
+    pub fn orig_px_for_tile<P: Into<MapPosition>>(&self, tile: P) -> (isize, isize) {
         let tile = tile.into();
         (
             (self.tile_size.0 * tile.x) as isize - (self.tile_size.0 * self.offset.x) as isize,
