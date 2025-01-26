@@ -75,7 +75,7 @@ pub fn get_pref_dir(
     organization: &str,
     application: &str,
 ) -> Result<PathBuf, GameUtilError> {
-    return if let Some(dir) = ProjectDirs::from(qualifier, organization, application) {
+    if let Some(dir) = ProjectDirs::from(qualifier, organization, application) {
         let path = dir.preference_dir().to_path_buf();
         fs::create_dir_all(path.clone()).map_err(|err| {
             GameUtilError::MakingDirs(err.to_string(), path.to_string_lossy().to_string())
@@ -83,5 +83,5 @@ pub fn get_pref_dir(
         Ok(path)
     } else {
         Err(GameUtilError::AppPrefDir)
-    };
+    }
 }

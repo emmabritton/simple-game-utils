@@ -39,6 +39,18 @@ impl IciTileset {
             panic!("Image has invalid palette");
         }
     }
+
+    pub fn tile_size(&self) -> (u8, u8) {
+        self.tile_size
+    }
+
+    pub fn palette(&self) -> &Vec<Color> {
+        &self.palette
+    }
+
+    pub fn tiles(&self) -> &HashMap<String, Vec<u8>> {
+        &self.tiles
+    }
 }
 
 impl IciTileset {

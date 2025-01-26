@@ -1,5 +1,8 @@
 # Changelog
 
+### Version 0.5.3
+- Add getter methods for Tileset
+
 ### Version 0.5.2
 ### BREAKING
 - Replace `Tilemap::onscreen_px_for_tile` with `Tilemap::orig_px_for_tile`
