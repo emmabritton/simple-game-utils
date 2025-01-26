@@ -12,7 +12,7 @@ Simple game utilities
 In your Cargo.toml file add
 
 ```
-simple-game-utils = { version = "0.5.2", features = ["controller"] }
+simple-game-utils = { version = "0.5.3", features = ["controller"] }
 ```
 
 ### Code
